@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quarkus + PrimeVue</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/primeicons@7.0.0/primeicons.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/primevue/umd/primevue.min.js"></script>
+    <script src="https://unpkg.com/@primeuix/themes/umd/aura.js"></script>
+
+    <style>
+        <!-- omitted -->
+    </style>
+</head>
+
+<body>
+    <div id="app" class="card">
+        <h1>Monthly Revenue Report</h1>
+        <p>Data served from a Quarkus backend with Hibernate Panache.</p>
+
+        <p-datatable :value="revenues" :paginator="true" :rows="5" sortMode="multiple" v-model:filters="filters"
+                     filterDisplay="row" :globalFilterFields="['period']">
+            <template #header>
+                <div style="text-align: left;">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <p-inputtext v-model="filters['global'].value" placeholder="Search by Period"/>
+                        </span>
+                </div>
+            </template>
+            <p-column field="period" header="Period" :sortable="true"></p-column>
+            <p-column field="revenue" header="Revenue (USD)" :sortable="true">
+                <template #body="slotProps">
+                    {{ formatCurrency(slotProps.data.revenue) }}
+                </template>
+            </p-column>
+        </p-datatable>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

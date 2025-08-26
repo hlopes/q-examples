@@ -1,10 +1,11 @@
-package entity;
+package org.hlopes.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import jakarta.persistence.Entity;
 
 @Entity
-public class Brand extends PanacheEntity {
+public class Dealership extends PanacheEntity {
   public String name;
+  public String city;
 }

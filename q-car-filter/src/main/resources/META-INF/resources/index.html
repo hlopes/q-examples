@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Quarkus Car Search</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/primeicons@7.0.0/primeicons.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/primevue/umd/primevue.min.js"></script>
+    <script src="https://unpkg.com/@primeuix/themes/umd/aura.js"></script>
+
+    <style>
+        <!-- omitted for brevity -->
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <h1>Car Search</h1>
+    <p>Dynamic filtering with Quarkus Panache and PrimeVue.</p>
+
+    <div class="card">
+        <h2>Filters</h2>
+        <div class="filter-grid">
+            <div class="filter-item">
+                <label for="brands">Brands</label>
+                <p-multiselect :options="brandNames" display="chip"
+                               placeholder="Select Brands" v-model="filters.brandNames"></p-multiselect>
+            </div>
+            <div class="filter-item">
+                <label for="dealers">Dealerships</label>
+                <p-multiselect :options="dealershipNames" display="chip"
+                               placeholder="Select Dealerships" v-model="filters.dealershipNames"></p-multiselect>
+            </div>
+            <div class="filter-item">
+                <label for="colors">Colors</label>
+                <p-multiselect :options="filterOptions.colors" display="chip" placeholder="Select Colors"
+                               v-model="filters.colors"></p-multiselect>
+            </div>
+            <div class="filter-item">
+                <label for="features">Features</label>
+                <p-multiselect :options="filterOptions.features" display="chip"
+                               placeholder="Select Features" v-model="filters.features"></p-multiselect>
+            </div>
+            <div class="filter-item">
+                <label for="minYear">Min Year</label>
+                <p-inputnumber :useGrouping="false" placeholder="e.g. 2020"
+                               v-model="filters.minYear"></p-inputnumber>
+            </div>
+            <div class="filter-item">
+                <label for="maxYear">Max Year</label>
+                <p-inputnumber :useGrouping="false" placeholder="e.g. 2024"
+                               v-model="filters.maxYear"></p-inputnumber>
+            </div>
+            <div class="filter-item">
+                <label for="minPrice">Min Price</label>
+                <p-inputnumber currency="USD" locale="en-US" mode="currency" placeholder="$20,000"
+                               v-model="filters.minPrice"></p-inputnumber>
+            </div>
+            <div class="filter-item">
+                <label for="maxPrice">Max Price</label>
+                <p-inputnumber currency="USD" locale="en-US" mode="currency" placeholder="$50,000"
+                               v-model="filters.maxPrice"></p-inputnumber>
+            </div>
+            <div class="filter-actions">
+                <p-button @click="searchCars" icon="pi pi-search" label="Search"></p-button>
+                <p-button @click="resetFilters" icon="pi pi-refresh" label="Reset" severity="secondary"></p-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <p-datatable :loading="loading" :value="cars" dataKey="id">
+            <template #header>
+                Found {{ pagination.totalRecords }} cars
+            </template>
+            <p-column :sortable="true" field="model" header="Model"></p-column>
+            <p-column field="brand.name" header="Brand"></p-column>
+            <p-column field="dealership.name" header="Dealership"></p-column>
+            <p-column :sortable="true" field="productionYear" header="Year"></p-column>
+            <p-column field="color" header="Color"></p-column>
+            <p-column :sortable="true" field="price" header="Price">
+                <template #body="slotProps">
+                    {{ formatCurrency(slotProps.data.price) }}
+                </template>
+            </p-column>
+        </p-datatable>
+        <p-paginator :rows="pagination.rows" :totalRecords="pagination.totalRecords"
+                     @page="onPageChange"></p-paginator>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

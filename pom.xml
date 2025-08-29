@@ -1,13 +1,23 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.hlopes</groupId>
-  <artifactId>me</artifactId>
-  <version>1.0</version>
-  <packaging>pom</packaging>
-  <name>Quarkus Examples</name>
-  <modules>
-    <module>q-prime-table</module>
-  </modules>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.hlopes</groupId>
+    <artifactId>q-examples</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>Quarkus Examples</name>
+    <modules>
+        <module>q-boilerplate</module>
+        <module>q-car-filter</module>
+        <module>q-jsonb</module>
+        <module>q-jwt</module>
+        <module>q-negotiation-simulator</module>
+        <module>q-prime-table</module>
+        <module>q-quartz</module>
+        <module>q-quinoa</module>
+        <module>q-testing</module>
+        <module>q-vthreads</module>
+    </modules>
 </project>

@@ -16,8 +16,8 @@
         <module>q-negotiation-simulator</module>
         <module>q-prime-table</module>
         <module>q-quartz</module>
-        <module>q-quinoa</module>
         <module>q-testing</module>
         <module>q-vthreads</module>
+        <module>q-cdi-events</module>
     </modules>
 </project>

@@ -19,5 +19,6 @@
         <module>q-testing</module>
         <module>q-vthreads</module>
         <module>q-cdi-events</module>
+        <module>q-quinoa</module>
     </modules>
 </project>

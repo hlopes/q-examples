@@ -20,5 +20,7 @@
         <module>q-vthreads</module>
         <module>q-cdi-events</module>
         <module>q-quinoa</module>
+        <module>q-rfc9457</module>
+        <module>q-api-versioning</module>
     </modules>
 </project>

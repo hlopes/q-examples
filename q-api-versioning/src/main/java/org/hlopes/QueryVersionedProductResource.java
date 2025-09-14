@@ -16,8 +16,7 @@ public class QueryVersionedProductResource {
     @GET
     public Response getProducts(@QueryParam("v") @DefaultValue("1") String version) {
         return switch (version) {
-            case "1" ->
-                    Response.ok(List.of(new ProductV1("p1", "Laptop", "A powerful laptop for developers."))).build();
+            case "1" -> Response.ok(List.of(new ProductV1("p1", "Laptop", "A powerful laptop for developers."))).build();
             case "2" -> Response.ok(List.of(new ProductV2("p1", "Laptop", "A powerful laptop for developers.", true)))
                     .build();
             default -> Response.status(Response.Status.BAD_REQUEST)

@@ -5,7 +5,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class Charlie {
 
-  public String ping() {
-    return "Ping from Charlie";
-  }
+    public String ping() {
+        return "Ping from Charlie";
+    }
 }

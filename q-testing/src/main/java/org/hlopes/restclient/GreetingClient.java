@@ -12,8 +12,8 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 @ApplicationScoped
 public interface GreetingClient {
 
-  @GET
-  @Path("/hello")
-  @Produces(MediaType.TEXT_PLAIN)
-  String hello();
+    @GET
+    @Path("/hello")
+    @Produces(MediaType.TEXT_PLAIN)
+    String hello();
 }

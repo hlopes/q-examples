@@ -32,12 +32,12 @@ class UserResourceTest {
     void list() {
 
         given()
-            .when()
-            .get(API_URL)
-            .then()
-            .statusCode(RestResponse.StatusCode.OK)
-            .body("$.size()", greaterThanOrEqualTo(1), "[0].name", is("admin"), "[0].password",
-                  nullValue());
+                .when()
+                .get(API_URL)
+                .then()
+                .statusCode(RestResponse.StatusCode.OK)
+                .body("$.size()", greaterThanOrEqualTo(1), "[0].name", is("admin"), "[0].password",
+                        nullValue());
     }
 
     @Test
@@ -45,13 +45,13 @@ class UserResourceTest {
     void create() {
 
         given()
-            .body("{\"name\":\"test\", \"password\":\"test\", \"roles\":[\"user\"]}")
-            .contentType(ContentType.JSON)
-            .when()
-            .post(API_URL)
-            .then()
-            .statusCode(RestResponse.StatusCode.CREATED)
-            .body("name", is("test"), "password", nullValue(), "created", not(emptyString()));
+                .body("{\"name\":\"test\", \"password\":\"test\", \"roles\":[\"user\"]}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post(API_URL)
+                .then()
+                .statusCode(RestResponse.StatusCode.CREATED)
+                .body("name", is("test"), "password", nullValue(), "created", not(emptyString()));
     }
 
     @Test
@@ -59,13 +59,13 @@ class UserResourceTest {
     void createForbidden() {
 
         given()
-            .body("{\"name\":\"test\", \"password\":\"test\", \"roles\":[\"user\"]}")
-            .contentType(ContentType.JSON)
-            .when()
-            .post(API_URL)
-            .then()
-            .statusCode(RestResponse.StatusCode.FORBIDDEN)
-            .body(emptyString());
+                .body("{\"name\":\"test\", \"password\":\"test\", \"roles\":[\"user\"]}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post(API_URL)
+                .then()
+                .statusCode(RestResponse.StatusCode.FORBIDDEN)
+                .body(emptyString());
     }
 
     @Test
@@ -73,13 +73,13 @@ class UserResourceTest {
     @RunOnVertxContext
     void createDuplicated() {
         given()
-            .body("{\"name\":\"user\", \"password\":\"test\", \"roles\":[\"user\"]}")
-            .contentType(ContentType.JSON)
-            .when()
-            .post(API_URL)
-            .then()
-            .statusCode(RestResponse.StatusCode.CONFLICT)
-            .body(emptyString());
+                .body("{\"name\":\"user\", \"password\":\"test\", \"roles\":[\"user\"]}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post(API_URL)
+                .then()
+                .statusCode(RestResponse.StatusCode.CONFLICT)
+                .body(emptyString());
     }
 
     @Test
@@ -87,67 +87,67 @@ class UserResourceTest {
     @RunOnVertxContext
     void update() {
         var user = given()
-            .body("{\"name\":\"to-update\", \"password\":\"test\", \"roles\":[\"user\"]}")
-            .contentType(ContentType.JSON)
-            .when()
-            .post(API_URL)
-            .as(User.class);
+                .body("{\"name\":\"to-update\", \"password\":\"test\", \"roles\":[\"user\"]}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post(API_URL)
+                .as(User.class);
 
         user.name = "updated";
 
         given()
-            .body(user)
-            .contentType(ContentType.JSON)
-            .when()
-            .put(API_URL + "/" + user.id)
-            .then()
-            .statusCode(RestResponse.StatusCode.OK)
-            .body("name", is("updated"));
+                .body(user)
+                .contentType(ContentType.JSON)
+                .when()
+                .put(API_URL + "/" + user.id)
+                .then()
+                .statusCode(RestResponse.StatusCode.OK)
+                .body("name", is("updated"));
     }
 
     @Test
     @TestSecurity(user = "admin", roles = "admin")
     void updateOptimisticLock() {
         given()
-            .body("{\"name\":\"updated\", \"version\":1337}")
-            .contentType(ContentType.JSON)
-            .when()
-            .put(API_URL + "/0")
-            .then()
-            .statusCode(RestResponse.StatusCode.CONFLICT);
+                .body("{\"name\":\"updated\", \"version\":1337}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put(API_URL + "/0")
+                .then()
+                .statusCode(RestResponse.StatusCode.CONFLICT);
     }
 
     @Test
     @TestSecurity(user = "admin", roles = "admin")
     void delete() throws Throwable {
         var toDelete = given()
-            .body("{\"name\":\"to-delete\", \"password\":\"test\"}")
-            .contentType(ContentType.JSON)
-            .post(API_URL)
-            .as(User.class);
+                .body("{\"name\":\"to-delete\", \"password\":\"test\"}")
+                .contentType(ContentType.JSON)
+                .post(API_URL)
+                .as(User.class);
 
         given()
-            .when()
-            .delete(API_URL + "/" + toDelete.id)
-            .then()
-            .statusCode(RestResponse.StatusCode.NO_CONTENT);
+                .when()
+                .delete(API_URL + "/" + toDelete.id)
+                .then()
+                .statusCode(RestResponse.StatusCode.NO_CONTENT);
 
         assertThat(VertxContextSupport.subscribeAndAwait(
-            () -> Panache.withSession(() -> User.findById(toDelete.id))), nullValue());
+                () -> Panache.withSession(() -> User.findById(toDelete.id))), nullValue());
     }
 
     @Test
     @TestSecurity(user = "admin", roles = "user")
     void changePassword() throws Throwable {
         given()
-            .body("{\"currentPassword\":\"quarkus\", \"newPassword\":\"changed\"}")
-            .contentType(ContentType.JSON)
-            .when()
-            .put(API_URL + "/self/password")
-            .then()
-            .statusCode(RestResponse.StatusCode.OK);
+                .body("{\"currentPassword\":\"quarkus\", \"newPassword\":\"changed\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put(API_URL + "/self/password")
+                .then()
+                .statusCode(RestResponse.StatusCode.OK);
 
         assertTrue(BcryptUtil.matches("changed", VertxContextSupport.subscribeAndAwait(
-            () -> Panache.withSession(() -> User.<User>findById(0L))).password));
+                () -> Panache.withSession(() -> User.<User> findById(0L))).password));
     }
 }

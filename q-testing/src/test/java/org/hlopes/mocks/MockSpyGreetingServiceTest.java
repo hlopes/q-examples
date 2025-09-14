@@ -16,21 +16,21 @@ import static org.mockito.Mockito.doReturn;
 @QuarkusTest
 public class MockSpyGreetingServiceTest {
 
-  private static final Logger log = LoggerFactory.getLogger(MockSpyGreetingServiceTest.class);
-  @InjectSpy
-  GreetingService greetingService;
+    private static final Logger log = LoggerFactory.getLogger(MockSpyGreetingServiceTest.class);
+    @InjectSpy
+    GreetingService greetingService;
 
-  @Test
-  void testWithSpyDefaultGreeting() {
-    given().when().get("/hello").then().statusCode(StatusCode.OK).body(is("ola"));
+    @Test
+    void testWithSpyDefaultGreeting() {
+        given().when().get("/hello").then().statusCode(StatusCode.OK).body(is("ola"));
 
-    Mockito.verify(greetingService, Mockito.times(1)).greet();
-  }
+        Mockito.verify(greetingService, Mockito.times(1)).greet();
+    }
 
-  @Test
-  void testOverride() {
-    doReturn("hi").when(greetingService).greet();
+    @Test
+    void testOverride() {
+        doReturn("hi").when(greetingService).greet();
 
-    given().when().get("/hello").then().statusCode(StatusCode.OK).body(is("hi"));
-  }
+        given().when().get("/hello").then().statusCode(StatusCode.OK).body(is("hi"));
+    }
 }

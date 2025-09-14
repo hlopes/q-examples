@@ -20,9 +20,9 @@ public class TheBestPlaceToBeResource {
     @RunOnVirtualThread
     public String getTheBestPlaceToBe() {
         var valence =
-            weatherService.getWeather(VALENCE_LATITUDE, VALENCE_LONGITUDE).weather().temperature();
+                weatherService.getWeather(VALENCE_LATITUDE, VALENCE_LONGITUDE).weather().temperature();
         var athens =
-            weatherService.getWeather(ATHENS_LATITUDE, ATHENS_LONGITUDE).weather().temperature();
+                weatherService.getWeather(ATHENS_LATITUDE, ATHENS_LONGITUDE).weather().temperature();
 
         return "Valence: " + valence + " - Athens: " + athens + " - thread: " + Thread.currentThread();
     }

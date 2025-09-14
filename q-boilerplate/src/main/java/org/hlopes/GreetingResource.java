@@ -11,12 +11,12 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/hello")
 public class GreetingResource {
 
-  /**
-   * Hello endpoint that returns a simple greeting message.
-   */
-  @GET
-  @Produces(MediaType.TEXT_PLAIN)
-  public String hello() {
-    return "Hello from Quarkus REST";
-  }
+    /**
+     * Hello endpoint that returns a simple greeting message.
+     */
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return "Hello from Quarkus REST";
+    }
 }

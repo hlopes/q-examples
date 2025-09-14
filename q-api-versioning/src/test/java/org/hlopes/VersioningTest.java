@@ -17,7 +17,6 @@ public class VersioningTest {
                 .statusCode(200)
                 .body(containsString("description"));
 
-
         given()
                 .when().get("/v2/products")
                 .then().statusCode(200)

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Quarkus + PrimeVue</title>
 
     <link href="https://cdn.jsdelivr.net/npm/primeicons@7.0.0/primeicons.css" rel="stylesheet">
@@ -18,29 +18,29 @@
 </head>
 
 <body>
-    <div id="app" class="card">
-        <h1>Monthly Revenue Report</h1>
-        <p>Data served from a Quarkus backend with Hibernate Panache.</p>
+<div class="card" id="app">
+    <h1>Monthly Revenue Report</h1>
+    <p>Data served from a Quarkus backend with Hibernate Panache.</p>
 
-        <p-datatable :value="revenues" :paginator="true" :rows="5" sortMode="multiple" v-model:filters="filters"
-                     filterDisplay="row" :globalFilterFields="['period']">
-            <template #header>
-                <div style="text-align: left;">
+    <p-datatable :globalFilterFields="['period']" :paginator="true" :rows="5" :value="revenues" filterDisplay="row"
+                 sortMode="multiple" v-model:filters="filters">
+        <template #header>
+            <div style="text-align: left;">
                         <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
-                            <p-inputtext v-model="filters['global'].value" placeholder="Search by Period"/>
+                            <p-inputtext placeholder="Search by Period" v-model="filters['global'].value"/>
                         </span>
-                </div>
+            </div>
+        </template>
+        <p-column :sortable="true" field="period" header="Period"></p-column>
+        <p-column :sortable="true" field="revenue" header="Revenue (USD)">
+            <template #body="slotProps">
+                {{ formatCurrency(slotProps.data.revenue) }}
             </template>
-            <p-column field="period" header="Period" :sortable="true"></p-column>
-            <p-column field="revenue" header="Revenue (USD)" :sortable="true">
-                <template #body="slotProps">
-                    {{ formatCurrency(slotProps.data.revenue) }}
-                </template>
-            </p-column>
-        </p-datatable>
-    </div>
-    <script src="app.js"></script>
+        </p-column>
+    </p-datatable>
+</div>
+<script src="app.js"></script>
 </body>
 
 </html>

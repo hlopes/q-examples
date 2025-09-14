@@ -17,25 +17,25 @@ import java.util.HashSet;
 @ApplicationScoped
 public class AuthService {
 
-  private static final Logger log = LoggerFactory.getLogger(AuthService.class);
-  private final String issuer;
-  private final UserService userService;
+    private static final Logger log = LoggerFactory.getLogger(AuthService.class);
+    private final String issuer;
+    private final UserService userService;
 
-  @Inject
-  public AuthService(@ConfigProperty(name = "mp.jwt.verify.issuer") String issuer,
-      UserService userService) {
-    this.issuer = issuer;
-    this.userService = userService;
-  }
+    @Inject
+    public AuthService(@ConfigProperty(name = "mp.jwt.verify.issuer") String issuer,
+            UserService userService) {
+        this.issuer = issuer;
+        this.userService = userService;
+    }
 
-  public Uni<String> authenticate(AuthRequest authRequest) {
-    return userService.findByName(authRequest.name()).onItem().transform(user -> {
-      if (user == null || UserService.matches(user, authRequest.password())) {
-        throw new AuthenticationFailedException("Invalid Credentials");
-      }
+    public Uni<String> authenticate(AuthRequest authRequest) {
+        return userService.findByName(authRequest.name()).onItem().transform(user -> {
+            if (user == null || UserService.matches(user, authRequest.password())) {
+                throw new AuthenticationFailedException("Invalid Credentials");
+            }
 
-      return Jwt.issuer(issuer).upn(user.name).groups(new HashSet<>(user.roles))
-          .expiresIn(Duration.ofHours(1L)).sign();
-    });
-  }
+            return Jwt.issuer(issuer).upn(user.name).groups(new HashSet<>(user.roles))
+                    .expiresIn(Duration.ofHours(1L)).sign();
+        });
+    }
 }

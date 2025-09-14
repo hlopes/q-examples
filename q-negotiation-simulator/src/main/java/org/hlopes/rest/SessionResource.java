@@ -358,7 +358,6 @@ public class SessionResource {
         }
     }
 
-
     private void checkValidMessage(final UserMessageRequest request) {
         if (request == null || request.content() == null || request.content().isBlank()) {
             Log.error("Message sending failed: content is required");

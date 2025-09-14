@@ -15,26 +15,26 @@ class AuthResourceTest {
     @Test
     void loginValidCredentials() {
         RestAssured
-            .given()
-            .body("{\"name\": \"admin\", \"password\":\"quarkus\"}")
-            .contentType(ContentType.JSON)
-            .when()
-            .post("/api/v1/auth/login")
-            .then()
-            .statusCode(RestResponse.StatusCode.OK)
-            .body(not(emptyString()));
+                .given()
+                .body("{\"name\": \"admin\", \"password\":\"quarkus\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/api/v1/auth/login")
+                .then()
+                .statusCode(RestResponse.StatusCode.OK)
+                .body(not(emptyString()));
     }
 
     @Test
     void loginInvalidCredentials() {
         RestAssured
-            .given()
-            .body("{\"name\": \"admin\", \"password\":\"not-quarkus\"}")
-            .contentType(ContentType.JSON)
-            .when()
-            .post("/api/v1/auth/login")
-            .then()
-            .statusCode(RestResponse.StatusCode.UNAUTHORIZED)
-            .body(emptyString());
+                .given()
+                .body("{\"name\": \"admin\", \"password\":\"not-quarkus\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/api/v1/auth/login")
+                .then()
+                .statusCode(RestResponse.StatusCode.UNAUTHORIZED)
+                .body(emptyString());
     }
 }

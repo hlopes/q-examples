@@ -7,13 +7,13 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @ApplicationScoped
 public class FooService {
 
-  @Inject
-  Charlie charlie;
+    @Inject
+    Charlie charlie;
 
-  @ConfigProperty(name="bar")
-  boolean bar;
+    @ConfigProperty(name = "bar")
+    boolean bar;
 
-  public String ping(){
-    return bar? charlie.ping() : "nok";
-  }
+    public String ping() {
+        return bar ? charlie.ping() : "nok";
+    }
 }

@@ -11,15 +11,15 @@ import org.mockito.Mockito;
 
 @QuarkusTest
 public class GreetingClientTest {
-  @InjectMock
-  @RestClient
-  GreetingClient greetingClient;
+    @InjectMock
+    @RestClient
+    GreetingClient greetingClient;
 
-  @Test
-  void testHelloEndpoint() {
-    Mockito.when(greetingClient.hello()).thenReturn("hello from mockito");
+    @Test
+    void testHelloEndpoint() {
+        Mockito.when(greetingClient.hello()).thenReturn("hello from mockito");
 
-    RestAssured.given().when().get("/hello").then().statusCode(RestResponse.StatusCode.OK)
-        .body(CoreMatchers.is("hello from mockito"));
-  }
+        RestAssured.given().when().get("/hello").then().statusCode(RestResponse.StatusCode.OK)
+                .body(CoreMatchers.is("hello from mockito"));
+    }
 }

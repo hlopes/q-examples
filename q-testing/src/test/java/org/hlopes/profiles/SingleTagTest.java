@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 @TestProfile(Profiles.SingleTag.class)
 public class SingleTagTest {
 
-  @Test
-  public void test() {
-    // test something
-  }
+    @Test
+    public void test() {
+        // test something
+    }
 }

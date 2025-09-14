@@ -55,8 +55,8 @@ public class PersonService {
     }
 
     /**
-     * Circuit Breaker example - will open circuit after 3 failures, preventing further calls
-     * for 1 second, then allowing a test call to see if the system has recovered
+     * Circuit Breaker example - will open circuit after 3 failures, preventing further calls for 1 second, then allowing a test
+     * call to see if the system has recovered
      */
     @CircuitBreaker(
             requestVolumeThreshold = 4,

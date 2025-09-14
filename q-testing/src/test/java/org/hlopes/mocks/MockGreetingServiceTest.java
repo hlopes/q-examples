@@ -13,13 +13,13 @@ import static org.mockito.Mockito.when;
 @QuarkusTest
 public class MockGreetingServiceTest {
 
-  @InjectMock
-  GreetingService greetingService;
+    @InjectMock
+    GreetingService greetingService;
 
-  @Test
-  void testGreeting() {
-    when(greetingService.greet()).thenReturn("hi");
+    @Test
+    void testGreeting() {
+        when(greetingService.greet()).thenReturn("hi");
 
-    given().when().get("/hello").then().statusCode(StatusCode.OK).body(is("hi"));
-  }
+        given().when().get("/hello").then().statusCode(StatusCode.OK).body(is("hi"));
+    }
 }

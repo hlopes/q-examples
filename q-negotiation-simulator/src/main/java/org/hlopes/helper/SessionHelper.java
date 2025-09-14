@@ -16,7 +16,7 @@ public class SessionHelper {
     public static Session getSessionOrThrow(final Map<String, Session> sessions, final String sessionId) {
         Session session = sessions.get(sessionId);
 
-        if (session==null) {
+        if (session == null) {
             throw new NotFoundException("Session not found: " + sessionId);
         }
 

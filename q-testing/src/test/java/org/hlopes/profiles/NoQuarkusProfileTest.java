@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 @QuarkusTest
 public class NoQuarkusProfileTest {
 
-  @Test
-  void test() {
-    Log.info("### without test profile");
-  }
+    @Test
+    void test() {
+        Log.info("### without test profile");
+    }
 }

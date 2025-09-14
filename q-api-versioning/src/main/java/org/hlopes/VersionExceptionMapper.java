@@ -15,7 +15,7 @@ public class VersionExceptionMapper implements ExceptionMapper<UnsupportedVersio
                 .entity(Map.of(
                         "error", "Unsupported API version requested.",
                         "message", exception.getMessage(),
-                        "supportedVersions", new String[]{"1", "2"}))
+                        "supportedVersions", new String[] { "1", "2" }))
                 .build();
     }
 }

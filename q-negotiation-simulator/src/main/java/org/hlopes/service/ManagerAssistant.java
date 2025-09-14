@@ -30,8 +30,8 @@ public interface ManagerAssistant {
             - Make the conversation personal by using {userName}'s name regularly.
             """)
     String chat(@MemoryId String sessionId,
-                @UserMessage String userMessage,
-                String personality,
-                String scenario,
-                String userName);
+            @UserMessage String userMessage,
+            String personality,
+            String scenario,
+            String userName);
 }

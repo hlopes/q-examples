@@ -1,18 +1,12 @@
 package com.example.fullstack.task;
 
-import java.time.ZonedDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-
 import com.example.fullstack.project.Project;
 import com.example.fullstack.user.User;
-
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "tasks")

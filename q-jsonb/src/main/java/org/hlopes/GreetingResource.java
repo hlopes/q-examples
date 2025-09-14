@@ -21,7 +21,7 @@ public class GreetingResource {
 
     @GET
     public Response hello() {
-        var all = Person.<Person>listAll();
+        var all = Person.<Person> listAll();
 
         Log.info("### " + all.get(0).getJson());
 

@@ -25,19 +25,23 @@ public class UserService {
         this.jwt = jwt;
     }
 
+    public static boolean matches(User user, String password) {
+        return !BcryptUtil.matches(password, user.password);
+    }
+
     public Uni<User> findById(long id) {
         return User
-            .<User>findById(id)
-            .onItem()
-            .ifNull()
-            .failWith(() -> new ObjectNotFoundException(id, "User"));
+                .<User> findById(id)
+                .onItem()
+                .ifNull()
+                .failWith(() -> new ObjectNotFoundException(id, "User"));
     }
 
     @WithSession
     public Uni<User> findByName(String name) {
         return User
-            .find("name", name)
-            .firstResult();
+                .find("name", name)
+                .firstResult();
     }
 
     public Uni<List<User>> list() {
@@ -54,12 +58,12 @@ public class UserService {
     @WithTransaction
     public Uni<User> update(User user) {
         return findById(user.id)
-            .chain(foundUser -> {
-                user.setPassword(foundUser.password);
+                .chain(foundUser -> {
+                    user.setPassword(foundUser.password);
 
-                return User.getSession();
-            })
-            .chain(sessionUser -> sessionUser.merge(user));
+                    return User.getSession();
+                })
+                .chain(sessionUser -> sessionUser.merge(user));
     }
 
     @WithTransaction
@@ -67,7 +71,7 @@ public class UserService {
         return getCurrentUser().chain(user -> {
             if (matches(user, currentPassword)) {
                 throw new ClientErrorException("Current password does not match",
-                                               Response.Status.CONFLICT);
+                        Response.Status.CONFLICT);
             }
 
             user.setPassword(BcryptUtil.bcryptHash(newPassword));
@@ -79,18 +83,14 @@ public class UserService {
     @WithTransaction
     public Uni<Void> delete(long id) {
         return findById(id).chain(user -> Uni
-            .combine()
-            .all()
-            .unis(Task.delete("user.id", user.id), Project.delete("user.id", user.id))
-            .asTuple()
-            .chain(user::delete));
+                .combine()
+                .all()
+                .unis(Task.delete("user.id", user.id), Project.delete("user.id", user.id))
+                .asTuple()
+                .chain(user::delete));
     }
 
     public Uni<User> getCurrentUser() {
         return findByName(jwt.getName());
-    }
-
-    public static boolean matches(User user, String password) {
-        return !BcryptUtil.matches(password, user.password);
     }
 }

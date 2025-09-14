@@ -1,12 +1,10 @@
 package org.hlopes.repository;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Parameters;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
-
 import org.hlopes.dtos.request.CarFilter;
 import org.hlopes.dtos.response.FilterOptions;
 import org.hlopes.dtos.response.PagedResult;
@@ -14,9 +12,9 @@ import org.hlopes.entity.Brand;
 import org.hlopes.entity.Car;
 import org.hlopes.entity.Dealership;
 
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
-import io.quarkus.panache.common.Parameters;
-import io.quarkus.panache.common.Sort;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @ApplicationScoped
 public class CarRepository implements PanacheRepository<Car> {

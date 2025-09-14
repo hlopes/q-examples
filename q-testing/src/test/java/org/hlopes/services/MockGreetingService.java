@@ -7,8 +7,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class MockGreetingService extends GreetingService {
 
-  @Override
-  public String greet() {
-    return "ola";
-  }
+    @Override
+    public String greet() {
+        return "ola";
+    }
 }

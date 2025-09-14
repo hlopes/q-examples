@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @QuarkusTest
 class GreetingServiceTest {
 
-  @Inject
-  GreetingService greetingService;
+    @Inject
+    GreetingService greetingService;
 
-  @Test
-  void testGreetService() {
-    assertEquals("ola", greetingService.greet());
-  }
+    @Test
+    void testGreetService() {
+        assertEquals("ola", greetingService.greet());
+    }
 }

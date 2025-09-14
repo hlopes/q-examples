@@ -11,18 +11,18 @@ import jakarta.ws.rs.Path;
 @Path("/api/v1/auth")
 public class AuthResource {
 
-  private final AuthService authService;
+    private final AuthService authService;
 
-  @Inject
-  public AuthResource(AuthService authService) {
-    this.authService = authService;
-  }
+    @Inject
+    public AuthResource(AuthService authService) {
+        this.authService = authService;
+    }
 
-  @WithSession
-  @PermitAll
-  @POST
-  @Path("/login")
-  public Uni<String> login(AuthRequest authRequest) {
-    return authService.authenticate(authRequest);
-  }
+    @WithSession
+    @PermitAll
+    @POST
+    @Path("/login")
+    public Uni<String> login(AuthRequest authRequest) {
+        return authService.authenticate(authRequest);
+    }
 }

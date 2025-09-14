@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 @QuarkusTestResource(MyWireMockResource.class)
 public class TestWireMock {
 
-  @InjectWireMock
-  WireMockServer wireMockServer;
+    @InjectWireMock
+    WireMockServer wireMockServer;
 
-  @Test
-  void test() {
-  }
+    @Test
+    void test() {
+    }
 }

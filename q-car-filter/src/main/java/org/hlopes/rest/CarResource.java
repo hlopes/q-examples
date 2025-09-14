@@ -1,12 +1,7 @@
 package org.hlopes.rest;
 
-import jakarta.ws.rs.DefaultValue;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-
 import org.hlopes.dtos.request.CarFilter;
 import org.hlopes.dtos.response.FilterOptions;
 import org.hlopes.repository.CarRepository;

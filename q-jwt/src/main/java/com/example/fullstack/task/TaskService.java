@@ -1,16 +1,14 @@
 package com.example.fullstack.task;
 
-import java.time.ZonedDateTime;
-import java.util.List;
-
-import org.hibernate.ObjectNotFoundException;
-
 import com.example.fullstack.user.UserService;
-
 import io.quarkus.security.UnauthorizedException;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import org.hibernate.ObjectNotFoundException;
+
+import java.time.ZonedDateTime;
+import java.util.List;
 
 @ApplicationScoped
 public class TaskService {
@@ -23,7 +21,7 @@ public class TaskService {
 
     public Uni<Task> findById(long id) {
         return userService.getCurrentUser()
-                .chain(user -> Task.<Task>findById(id)
+                .chain(user -> Task.<Task> findById(id)
                         .onItem()
                         .ifNull()
                         .failWith(() -> new ObjectNotFoundException(id, "Task"))

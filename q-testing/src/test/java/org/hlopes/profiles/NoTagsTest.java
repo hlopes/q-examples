@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 @TestProfile(Profiles.NoTags.class)
 public class NoTagsTest {
 
-  @Test
-  void test() {
-    Log.info("### Test Profile noTags");
-  }
+    @Test
+    void test() {
+        Log.info("### Test Profile noTags");
+    }
 }
